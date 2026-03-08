@@ -43,7 +43,7 @@ jobs:
     steps:
       - name: Trigger Render Deploy Hook
         run: |
-          curl -s "${{ secrets.RENDER_DEPLOY_HOOK }}"
+          curl -s "${{ secrets.BACKEND_DEPLOY_HOOK }}"
           echo "Triggered backend deploy on Render"
 
   deploy-frontend:
@@ -54,5 +54,5 @@ jobs:
     steps:
       - name: Trigger Vercel Deploy Hook
         run: |
-          curl -s -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+          curl -s -X POST "${{ secrets.FRONTEND_DEPLOY_HOOK }}"
           echo "Triggered frontend deploy on Vercel"

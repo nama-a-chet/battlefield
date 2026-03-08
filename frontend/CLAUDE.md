@@ -1,4 +1,4 @@
-# Battlefield Frontend
+# Battleship Frontend
 
 ## Quick Reference
 

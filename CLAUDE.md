@@ -1,8 +1,8 @@
-# Battlefield Workspace
+# Battleship Workspace
 
 ## Architecture Overview
 
-This is a monorepo containing the Battlefield web app and its backend:
+This is a monorepo containing the Battleship web app and its backend:
 - `frontend/` - React + Vite web application
 - `backend/` - Flask REST API
 

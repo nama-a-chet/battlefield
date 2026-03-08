@@ -1,4 +1,4 @@
-# Battlefield Frontend
+# Battleship Frontend
 
 A Battleship game with a pixel-art aesthetic, built with React 19, TypeScript, and Vite.
 
@@ -110,6 +110,6 @@ Set `VITE_API_URL` in the Vercel project environment variables to point at the p
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `VITE_API_URL` | Production only | Backend API base URL (e.g., `https://battlefield-api.onrender.com/api`). Falls back to `/api` in dev, where Vite proxies it to `localhost:8084`. |
+| `VITE_API_URL` | Production only | Backend API base URL (e.g., `https://battleship-api.onrender.com/api`). Falls back to `/api` in dev, where Vite proxies it to `localhost:8084`. |
 
 See `.env.example` for reference. All frontend env vars must use the `VITE_` prefix (Vite requirement — vars without this prefix are not exposed to client code).

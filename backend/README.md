@@ -1,4 +1,4 @@
-# Battlefield Backend
+# Battleship Backend
 
 Flask API server for a real-time Battleship game supporting human-vs-human and human-vs-AI modes.
 
@@ -63,10 +63,10 @@ gunicorn main:app --bind 0.0.0.0:8084 --workers 1 --threads 20 --timeout 0
 ## Production (Docker)
 
 ```bash
-docker build -t battlefield-backend .
+docker build -t battleship-backend .
 docker run -p 8084:8084 \
   -e CORS_ALLOWED_ORIGINS="https://yourdomain.com" \
-  battlefield-backend
+  battleship-backend
 ```
 
 The `--timeout 0` in the Dockerfile CMD is required for long-lived SSE connections.

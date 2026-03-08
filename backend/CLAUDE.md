@@ -1,4 +1,4 @@
-# Battlefield Backend
+# Battleship Backend
 
 ## Deployment
 
