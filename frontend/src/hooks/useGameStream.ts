@@ -90,7 +90,7 @@ export function useGameStream(handlers: GameStreamHandlers) {
     }
 
     es.onerror = () => {
-      // EventSource auto-reconnects.
+      // EventSource auto-reconnects
     }
   }, [])
 
