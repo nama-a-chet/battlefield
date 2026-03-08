@@ -21,7 +21,9 @@ function App() {
   const [opponent, setOpponent] = useState<Opponent>('ai')
   const [name, setName] = useState('')
   const [gameCode, setGameCode] = useState('')
-  const [theme, setTheme] = useState<Theme>('light')
+  const [theme, setTheme] = useState<Theme>(() =>
+    (localStorage.getItem('bf_theme') as Theme) || 'light'
+  )
   const [isAdmin] = useState(() => window.location.pathname === '/admin')
 
   const [nameError, setNameError] = useState('')
@@ -30,6 +32,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('bf_theme', theme)
   }, [theme])
 
   const handleStart = async () => {
