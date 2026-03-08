@@ -1,0 +1,155 @@
+/* ============================================
+   MODE TOGGLE
+   ============================================ */
+
+.toggle-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.toggle-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  border: 3px solid var(--border);
+  background: var(--bg);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--purple-dim);
+  border: 3px solid var(--purple);
+  transition: left 0.15s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.toggle-thumb.toggle-right {
+  left: 50%;
+}
+
+.toggle-option {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.toggle-option.active {
+  color: var(--purple);
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.input {
+  font-family: 'Azeret Mono', monospace;
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border: 3px solid var(--border);
+  color: var(--text);
+  outline: none;
+  letter-spacing: 0.05em;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus {
+  border-color: var(--purple);
+  box-shadow:
+    0 0 0 1px var(--purple-glow),
+    4px 4px 0 0 rgba(94, 56, 245, 0.15);
+}
+
+.input::placeholder {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+}
+
+.code-input {
+  font-size: 1.4rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* ============================================
+   OPPONENT TOGGLE
+   ============================================ */
+
+.opponent-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.opponent-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  background: var(--bg);
+  border: 3px solid var(--border);
+  color: var(--text-dim);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 4px 4px 0 0 var(--border);
+}
+
+.opponent-btn:hover {
+  border-color: rgba(94, 56, 245, 0.5);
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 0 var(--border);
+}
+
+.opponent-btn.selected {
+  border-color: var(--purple);
+  background: var(--purple-dim);
+  color: var(--purple);
+  box-shadow: 4px 4px 0 0 rgba(94, 56, 245, 0.3);
+}

@@ -11,16 +11,17 @@ This is a monorepo containing the Battlefield web app and its backend:
 ```
 frontend/                  # React + Vite
 ├── src/
-│   ├── components/        # Reusable UI components
-│   ├── hooks/             # Custom React hooks
-│   ├── pages/             # Page-level components / routes
-│   ├── services/          # API client, utilities
-│   ├── types/             # TypeScript type definitions
-│   ├── assets/            # Images, fonts, etc.
-│   ├── styles/            # Global styles, theme
-│   ├── App.tsx            # Root component
+│   ├── components/        # Game UI components + colocated CSS
+│   ├── hooks/             # Custom React hooks (useGame, useGameStream)
+│   ├── services/          # API client
+│   ├── utils/             # Utilities (session persistence)
+│   ├── types/             # TypeScript type definitions + constants
+│   ├── icons/             # Icon barrel file (pixelarticons re-exports)
+│   ├── styles/            # Shared styles (base, buttons, forms)
+│   ├── App.tsx            # Root component (lobby UI + screen router)
+│   ├── index.css          # CSS reset + theme variables
 │   └── main.tsx           # Entry point
-├── public/                # Static files served as-is
+├── public/                # Static files (favicon, crosshair cursor)
 ├── index.html             # HTML entry point
 ├── vite.config.ts         # Vite configuration
 ├── tsconfig.json

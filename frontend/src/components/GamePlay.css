@@ -1,0 +1,147 @@
+/* ============================================
+   GAMEPLAY
+   ============================================ */
+
+.gameplay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 960px;
+}
+
+.turn-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  border: 3px solid var(--border);
+  background: var(--bg-card);
+  box-shadow: 4px 4px 0 0 var(--border);
+}
+
+.turn-indicator.your-turn {
+  border-color: var(--purple);
+  color: var(--purple);
+  box-shadow: 4px 4px 0 0 rgba(94, 56, 245, 0.3);
+  animation: turn-pulse 1.5s ease-in-out infinite;
+}
+
+.turn-indicator.opponent-turn {
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+@keyframes turn-pulse {
+  0%, 100% { box-shadow: 4px 4px 0 0 rgba(94, 56, 245, 0.3); }
+  50% { box-shadow: 4px 4px 0 0 rgba(94, 56, 245, 0.6), 0 0 20px -5px var(--purple-glow); }
+}
+
+.boards-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.board-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.boards-divider {
+  width: 3px;
+  height: 400px;
+  background: var(--border);
+  align-self: center;
+}
+
+/* Ship status panel */
+.ship-status {
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ship-status-label {
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  margin-bottom: 0.15rem;
+}
+
+.ship-status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ship-status-item.sunk {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.ship-status-name {
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  min-width: 70px;
+}
+
+.ship-status-dots {
+  display: flex;
+  gap: 2px;
+}
+
+.ship-status-dot {
+  width: 12px;
+  height: 8px;
+  background: var(--ship-color);
+}
+
+.ship-status-dot.sunk {
+  background: #e53535;
+}
+
+/* Forfeit area */
+.forfeit-area {
+  margin-top: 0.5rem;
+}
+
+.forfeit-confirm {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 900px) {
+  .boards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boards-divider {
+    width: 80%;
+    height: 3px;
+  }
+}

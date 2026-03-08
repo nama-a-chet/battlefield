@@ -1,0 +1,119 @@
+/* ============================================
+   PRIMARY BUTTON
+   ============================================ */
+
+.primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: var(--purple);
+  border: 3px solid var(--purple);
+  color: #fff;
+  font-family: 'Azeret Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 6px 6px 0 0 rgba(94, 56, 245, 0.3);
+  margin-top: 0.5rem;
+}
+
+.primary-btn:hover {
+  background: #7050ff;
+  border-color: #7050ff;
+  box-shadow: 8px 8px 0 0 rgba(94, 56, 245, 0.35);
+  transform: translate(-2px, -2px);
+}
+
+.primary-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 0 rgba(94, 56, 245, 0.3);
+}
+
+/* ============================================
+   SECONDARY BUTTON
+   ============================================ */
+
+.secondary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  background: var(--bg);
+  border: 3px solid var(--border);
+  color: var(--text);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 4px 4px 0 0 var(--border);
+}
+
+.secondary-btn:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+  box-shadow: 4px 4px 0 0 rgba(94, 56, 245, 0.3);
+}
+
+.secondary-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--border);
+}
+
+/* ============================================
+   TEXT BUTTON
+   ============================================ */
+
+.text-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: 'Azeret Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.15s;
+}
+
+.text-btn:hover {
+  color: var(--text);
+}
+
+.text-btn.danger {
+  color: #e53535;
+  opacity: 0.7;
+}
+
+.text-btn.danger:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   DISABLED BUTTONS
+   ============================================ */
+
+.primary-btn:disabled,
+.secondary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.primary-btn:disabled:hover,
+.secondary-btn:disabled:hover {
+  transform: none;
+  box-shadow: 6px 6px 0 0 rgba(94, 56, 245, 0.3);
+}

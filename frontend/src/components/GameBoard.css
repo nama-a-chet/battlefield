@@ -1,0 +1,317 @@
+/* ============================================
+   GAME BOARD
+   ============================================ */
+
+.board-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.board-label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 24px repeat(10, 36px);
+  grid-template-rows: 20px repeat(10, 36px);
+  border: 3px solid var(--border);
+  background: var(--border);
+  gap: 1px;
+}
+
+.board-corner {
+  background: var(--bg-card);
+}
+
+.board-col-header,
+.board-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  background: var(--bg-card);
+}
+
+.board-cell {
+  background: var(--bg);
+  cursor: default;
+  position: relative;
+  transition: background 0.1s;
+}
+
+/* ── Ship hull rendering ── */
+
+.board-cell.cell-ship {
+  background: var(--bg);
+  overflow: visible;
+}
+
+/* Hull base — pseudo-element shaped per direction */
+.board-cell.cell-ship::before {
+  content: '';
+  position: absolute;
+  background: var(--ship-color);
+  z-index: 1;
+}
+
+/* Horizontal hull */
+.board-cell.cell-ship.ship-h::before {
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+}
+
+/* Vertical hull */
+.board-cell.cell-ship.ship-v::before {
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+}
+
+/* Extend hull across the 1px gap for connected cells */
+.board-cell.cell-ship.ship-h.connected-right::before { right: -1px; }
+.board-cell.cell-ship.ship-h.connected-left::before { left: -1px; }
+.board-cell.cell-ship.ship-v.connected-bottom::before { bottom: -1px; }
+.board-cell.cell-ship.ship-v.connected-top::before { top: -1px; }
+
+/* ── Bow / Stern clip-paths ── */
+
+/* Horizontal bow (left end, points left) */
+.board-cell.cell-ship.ship-bow.ship-h::before {
+  clip-path: polygon(
+    100% 0%, 100% 100%,
+    33% 100%, 8% 70%, 8% 30%, 33% 0%
+  );
+}
+
+/* Horizontal stern (right end) */
+.board-cell.cell-ship.ship-stern.ship-h::before {
+  clip-path: polygon(
+    0% 0%, 67% 0%, 92% 30%, 92% 70%, 67% 100%, 0% 100%
+  );
+}
+
+/* Vertical bow (top end, points up) */
+.board-cell.cell-ship.ship-bow.ship-v::before {
+  clip-path: polygon(
+    0% 100%, 100% 100%,
+    100% 33%, 70% 8%, 30% 8%, 0% 33%
+  );
+}
+
+/* Vertical stern (bottom end) */
+.board-cell.cell-ship.ship-stern.ship-v::before {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    100% 67%, 70% 92%, 30% 92%, 0% 67%
+  );
+}
+
+/* ── Bridge / cabin detail ── */
+
+.board-cell.cell-ship.ship-bridge::after {
+  content: '';
+  position: absolute;
+  background: var(--ship-color);
+  z-index: 2;
+}
+
+/* Horizontal bridge — bump on top of hull */
+.board-cell.cell-ship.ship-bridge.ship-h::after {
+  width: 50%;
+  height: 5px;
+  top: 1px;
+  left: 25%;
+}
+
+/* Vertical bridge — bump on left side of hull */
+.board-cell.cell-ship.ship-bridge.ship-v::after {
+  height: 50%;
+  width: 5px;
+  left: 1px;
+  top: 25%;
+}
+
+/* ── Deck line detail on mid cells ── */
+
+.board-cell.cell-ship.ship-mid.ship-h::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  right: -1px;
+  height: 1px;
+  background: var(--ship-detail);
+  z-index: 2;
+}
+
+.board-cell.cell-ship.ship-mid.ship-v::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -1px;
+  bottom: -1px;
+  width: 1px;
+  background: var(--ship-detail);
+  z-index: 2;
+}
+
+/* Bridge overrides mid deck line (::after used for bridge instead) */
+.board-cell.cell-ship.ship-bridge.ship-mid::after {
+  top: unset;
+  left: unset;
+  right: unset;
+  bottom: unset;
+  width: unset;
+  height: unset;
+}
+
+.board-cell.cell-ship.ship-bridge.ship-mid.ship-h::after {
+  width: 50%;
+  height: 5px;
+  top: 1px;
+  left: 25%;
+}
+
+.board-cell.cell-ship.ship-bridge.ship-mid.ship-v::after {
+  height: 50%;
+  width: 5px;
+  left: 1px;
+  top: 25%;
+}
+
+/* Hit cell — red */
+.board-cell.cell-hit {
+  background: #e53535;
+}
+
+.board-cell.cell-hit::after {
+  content: '';
+  position: absolute;
+  inset: 30%;
+  background: #fff;
+  opacity: 0.3;
+}
+
+/* Sunk cell — dark red ship hull */
+.board-cell.cell-sunk {
+  background: var(--bg);
+  overflow: visible;
+}
+
+/* Sunk hull shape */
+.board-cell.cell-sunk.ship-h::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  background: #8b0000;
+  z-index: 1;
+}
+
+.board-cell.cell-sunk.ship-v::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  background: #8b0000;
+  z-index: 1;
+}
+
+/* Sunk hull gap coverage */
+.board-cell.cell-sunk.ship-h.connected-right::before { right: -1px; }
+.board-cell.cell-sunk.ship-h.connected-left::before { left: -1px; }
+.board-cell.cell-sunk.ship-v.connected-bottom::before { bottom: -1px; }
+.board-cell.cell-sunk.ship-v.connected-top::before { top: -1px; }
+
+/* Sunk bow/stern clip-paths */
+.board-cell.cell-sunk.ship-bow.ship-h::before {
+  clip-path: polygon(100% 0%, 100% 100%, 33% 100%, 8% 70%, 8% 30%, 33% 0%);
+}
+.board-cell.cell-sunk.ship-stern.ship-h::before {
+  clip-path: polygon(0% 0%, 67% 0%, 92% 30%, 92% 70%, 67% 100%, 0% 100%);
+}
+.board-cell.cell-sunk.ship-bow.ship-v::before {
+  clip-path: polygon(0% 100%, 100% 100%, 100% 33%, 70% 8%, 30% 8%, 0% 33%);
+}
+.board-cell.cell-sunk.ship-stern.ship-v::before {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 67%, 70% 92%, 30% 92%, 0% 67%);
+}
+
+/* X mark on sunk cells */
+.board-cell.cell-sunk::after {
+  content: 'X';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  font-weight: 900;
+  z-index: 2;
+}
+
+/* Miss cell — small grey dot */
+.board-cell.cell-miss::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--text-dim);
+  opacity: 0.4;
+  transform: translate(-50%, -50%);
+}
+
+/* Interactive cell */
+.board-cell.cell-interactive {
+  cursor: url('/crosshair.svg') 12 12, crosshair;
+}
+
+/* Placed ships are clickable to reposition */
+.board-cell.cell-ship.cell-interactive {
+  cursor: pointer;
+}
+
+.board-cell.cell-interactive:hover {
+  background: var(--purple-dim);
+  box-shadow: inset 0 0 0 2px var(--purple);
+}
+
+/* Preview cells */
+.board-cell.cell-preview-valid {
+  background: rgba(94, 56, 245, 0.3) !important;
+  box-shadow: inset 0 0 0 2px var(--purple);
+}
+
+.board-cell.cell-preview-invalid {
+  background: rgba(229, 53, 53, 0.3) !important;
+  box-shadow: inset 0 0 0 2px #e53535;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 900px) {
+  .board {
+    grid-template-columns: 20px repeat(10, 30px);
+    grid-template-rows: 18px repeat(10, 30px);
+  }
+}

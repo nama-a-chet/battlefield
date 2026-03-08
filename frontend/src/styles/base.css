@@ -1,0 +1,313 @@
+/* ============================================
+   PIXEL BACKGROUND
+   ============================================ */
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(94, 56, 245, 0.04) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(94, 56, 245, 0.04) 2px, transparent 2px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Corner decorations */
+.corner-decor {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.corner-decor::before,
+.corner-decor::after {
+  content: '';
+  position: absolute;
+  background: var(--purple);
+  opacity: 0.15;
+}
+
+.top-left { top: 16px; left: 16px; }
+.top-left::before { top: 0; left: 0; width: 24px; height: 4px; }
+.top-left::after { top: 0; left: 0; width: 4px; height: 24px; }
+
+.top-right { top: 16px; right: 16px; }
+.top-right::before { top: 0; right: 0; width: 24px; height: 4px; }
+.top-right::after { top: 0; right: 0; width: 4px; height: 24px; }
+
+.bottom-left { bottom: 16px; left: 16px; }
+.bottom-left::before { bottom: 0; left: 0; width: 24px; height: 4px; }
+.bottom-left::after { bottom: 0; left: 0; width: 4px; height: 24px; }
+
+.bottom-right { bottom: 16px; right: 16px; }
+.bottom-right::before { bottom: 0; right: 0; width: 24px; height: 4px; }
+.bottom-right::after { bottom: 0; right: 0; width: 4px; height: 24px; }
+
+/* ============================================
+   THEME TOGGLE
+   ============================================ */
+
+.theme-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  color: var(--purple);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow:
+    4px 4px 0 0 var(--border);
+}
+
+.theme-toggle:hover {
+  border-color: var(--purple);
+  box-shadow: 4px 4px 0 0 var(--purple);
+  color: #fff;
+  background: var(--purple);
+}
+
+.theme-toggle:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--border);
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* ============================================
+   CARD — pixel border
+   ============================================ */
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  box-shadow:
+    6px 6px 0 0 var(--border),
+    0 0 80px -20px var(--purple-glow);
+}
+
+/* Pixel notched corners */
+.pixel-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--bg);
+  z-index: 2;
+}
+
+.pixel-corner::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 3px solid var(--border);
+}
+
+.pc-tl { top: -3px; left: -3px; }
+.pc-tl::after { border-right: none; border-bottom: none; top: 0; left: 0; }
+
+.pc-tr { top: -3px; right: -3px; }
+.pc-tr::after { border-left: none; border-bottom: none; top: 0; right: 0; }
+
+.pc-bl { bottom: -3px; left: -3px; }
+.pc-bl::after { border-right: none; border-top: none; bottom: 0; left: 0; }
+
+.pc-br { bottom: -3px; right: -3px; }
+.pc-br::after { border-left: none; border-top: none; bottom: 0; right: 0; }
+
+/* ============================================
+   TITLE
+   ============================================ */
+
+.title-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title-icon {
+  color: var(--purple);
+  line-height: 0;
+}
+
+/*
+ * Pixel title: render text very small, then scale up.
+ * The browser's image-rendering: pixelated on the
+ * container keeps the hard pixel edges.
+ */
+.pixel-title-wrapper {
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+  transform-origin: center center;
+}
+
+.pixel-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  line-height: 1;
+  /* Render at tiny size, scale up 6x for pixel crunch */
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--text);
+  transform: scale(6);
+  margin: 2rem 0;
+  text-shadow: 0.5px 0.5px 0 var(--border);
+}
+
+.pixel-title-top {
+  font-size: 4px;
+  letter-spacing: 0.35em;
+  color: var(--purple);
+  text-shadow: none;
+}
+
+.pixel-title-bottom {
+  font-size: 7px;
+}
+
+.title-accent {
+  color: var(--purple);
+  text-shadow: 0.5px 0.5px 0 rgba(94, 56, 245, 0.3);
+}
+
+/* Pixel-dot divider */
+.title-underline,
+.footer-line {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 80%;
+}
+
+.pixel-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: var(--purple);
+  flex-shrink: 0;
+}
+
+.pixel-line {
+  display: block;
+  flex: 1;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--purple),
+    var(--purple) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  background-size: 8px 3px;
+}
+
+.subtitle {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.3em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-line {
+  width: 100%;
+}
+
+.footer-text {
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+/* ============================================
+   GAME CARD (wider variant)
+   ============================================ */
+
+.game-card {
+  max-width: 520px;
+}
+
+/* ============================================
+   ERROR MESSAGE
+   ============================================ */
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field-error {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #e53535;
+  cursor: pointer;
+}
+
+.input-error {
+  border-color: #e53535 !important;
+  box-shadow: 0 0 0 1px rgba(229, 53, 53, 0.3);
+}

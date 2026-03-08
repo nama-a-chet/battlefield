@@ -1,0 +1,93 @@
+/* ============================================
+   GAME OVER
+   ============================================ */
+
+.game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.game-over-icon {
+  line-height: 0;
+}
+
+.game-over-icon.victory {
+  color: #fbbf24;
+  animation: victory-bounce 0.6s ease-out;
+}
+
+.game-over-icon.defeat {
+  color: #e53535;
+}
+
+@keyframes victory-bounce {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.game-over-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+}
+
+.game-over-title.victory {
+  color: #fbbf24;
+  text-shadow: 2px 2px 0 rgba(251, 191, 36, 0.3);
+}
+
+.game-over-title.defeat {
+  color: #e53535;
+  text-shadow: 2px 2px 0 rgba(229, 53, 53, 0.3);
+}
+
+.game-over-subtitle {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+.game-over-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--purple);
+}
+
+.stat-label {
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.game-over-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 0.5rem;
+}
