@@ -2,8 +2,8 @@
    ADMIN PAGE
    ============================================ */
 
-.admin-card {
-  max-width: 1200px;
+.card.admin-card {
+  max-width: none;
   width: 100%;
 }
 
@@ -97,6 +97,7 @@
   border-bottom: 1px solid var(--border);
   color: var(--text);
   white-space: nowrap;
+  vertical-align: top;
 }
 
 .history-table tr:hover td {

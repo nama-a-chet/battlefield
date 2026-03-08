@@ -204,9 +204,7 @@ export default function Admin() {
                 <th>Player 1</th>
                 <th>Player 2</th>
                 <th>Winner</th>
-                <th>Reason</th>
-                <th>P1 Shots</th>
-                <th>P2 Shots</th>
+                <th>Result</th>
                 <th>Duration</th>
               </tr>
             </thead>
@@ -221,29 +219,29 @@ export default function Admin() {
                         {g.mode.toUpperCase()}
                       </span>
                     </td>
-                    <td>{g.player1_name}</td>
-                    <td>{g.player2_name}</td>
-                    <td className="winner-cell">{g.winner_name || '-'}</td>
-                    <td className="reason-cell">
-                      <span className={`reason-badge ${r.cls}`}>{r.text}</span>
-                    </td>
                     <td>
-                      {g.player1_shots ? (
+                      <div>{g.player1_name}</div>
+                      {g.player1_shots && (
                         <span className="shots-detail">
                           <span className="hits">{g.player1_shots.hits}H</span>
                           {' / '}
                           <span className="misses">{g.player1_shots.misses}M</span>
                         </span>
-                      ) : '-'}
+                      )}
                     </td>
                     <td>
-                      {g.player2_shots ? (
+                      <div>{g.player2_name}</div>
+                      {g.player2_shots && (
                         <span className="shots-detail">
                           <span className="hits">{g.player2_shots.hits}H</span>
                           {' / '}
                           <span className="misses">{g.player2_shots.misses}M</span>
                         </span>
-                      ) : '-'}
+                      )}
+                    </td>
+                    <td className="winner-cell">{g.winner_name || '-'}</td>
+                    <td className="reason-cell">
+                      <span className={`reason-badge ${r.cls}`}>{r.text}</span>
                     </td>
                     <td>{formatDuration(g.duration_seconds)}</td>
                   </tr>
