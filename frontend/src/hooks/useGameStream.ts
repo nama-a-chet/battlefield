@@ -101,7 +101,7 @@ export function useGameStream(handlers: GameStreamHandlers) {
     }
   }, [])
 
-  // Clean up on unmount
+  // Clean up on unmount.
   useEffect(() => {
     return () => {
       if (sseRef.current) {
