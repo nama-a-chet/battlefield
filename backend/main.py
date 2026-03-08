@@ -9,6 +9,7 @@ from flask_cors import CORS
 from setup.config import CLEANUP_INTERVAL_SECONDS, GAME_INACTIVE_TIMEOUT_SECONDS
 from game.store import games, player_tokens, game_codes, store_lock
 from request_handlers.game_routes import game_bp
+from request_handlers.admin_routes import admin_bp
 
 # ── Logging ──────────────────────────────────────────────────
 
@@ -26,6 +27,7 @@ cors_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:8100").s
 CORS(app, origins=cors_origins)
 
 app.register_blueprint(game_bp)
+app.register_blueprint(admin_bp)
 
 
 @app.errorhandler(Exception)

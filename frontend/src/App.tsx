@@ -6,6 +6,7 @@ import WaitingRoom from '@/components/WaitingRoom'
 import ShipPlacement from '@/components/ShipPlacement'
 import GamePlay from '@/components/GamePlay'
 import GameOver from '@/components/GameOver'
+import Admin from '@/components/Admin'
 import { useGame } from '@/hooks/useGame'
 import '@/styles/base.css'
 import '@/styles/buttons.css'
@@ -21,6 +22,7 @@ function App() {
   const [name, setName] = useState('')
   const [gameCode, setGameCode] = useState('')
   const [theme, setTheme] = useState<Theme>('light')
+  const [isAdmin] = useState(() => window.location.pathname === '/admin')
 
   const [nameError, setNameError] = useState('')
 
@@ -303,7 +305,7 @@ function App() {
         )}
       </button>
 
-      {renderScreen()}
+      {isAdmin ? <Admin /> : renderScreen()}
     </div>
   )
 }

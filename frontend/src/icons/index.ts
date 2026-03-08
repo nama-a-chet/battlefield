@@ -32,6 +32,10 @@ export { default as Chess } from 'pixelarticons/svg/chess.svg?react'
 export { default as Power } from 'pixelarticons/svg/power.svg?react'
 export { default as ArrowRight } from 'pixelarticons/svg/arrow-right.svg?react'
 
+// Admin
+export { default as Lock } from 'pixelarticons/svg/lock.svg?react'
+export { default as Script } from 'pixelarticons/svg/script.svg?react'
+export { default as Redo } from 'pixelarticons/svg/redo.svg?react'
 // Game UI
 export { default as Repeat } from 'pixelarticons/svg/repeat.svg?react'
 export { default as Check } from 'pixelarticons/svg/check.svg?react'

@@ -7,6 +7,7 @@ from game.store import games
 from game.validation import validate_placement, validate_shot
 from game.events import push_event, push_both
 from game.ai import setup_ai_player, process_shot, ai_take_turn, ai_push_events
+from game.history import log_game_completion
 
 logger = logging.getLogger(__name__)
 
@@ -163,11 +164,14 @@ def fire_player_shot(game: Game, player_key: str, row: int, col: int) -> tuple[d
             "reason": "all_ships_sunk",
         })
         logger.info("Game %s: %s wins", game.id[:8], player_key)
+        log_game_completion(game, "all_ships_sunk")
         return result, None
 
     if ai_result is not None:
         ai_push_events(game, ai_result)
-        if not ai_result["game_over"]:
+        if ai_result["game_over"]:
+            log_game_completion(game, "all_ships_sunk")
+        else:
             push_event(game, "player1", "phase_change", {
                 "phase": "playing",
                 "current_turn": "player1",
@@ -202,6 +206,7 @@ def forfeit_game(game: Game, player_key: str) -> tuple[bool, str | None]:
     })
 
     logger.info("Game %s: %s forfeited", game.id[:8], player_key)
+    log_game_completion(game, "forfeit")
     return True, None
 
 
@@ -265,3 +270,4 @@ def handle_disconnect(game: Game, player_key: str) -> None:
         "reason": "opponent_left",
     })
     logger.info("Game %s: %s disconnected, forfeited", game.id[:8], player_key)
+    log_game_completion(game, "disconnect")

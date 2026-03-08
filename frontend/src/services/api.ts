@@ -77,3 +77,35 @@ export function rematch(gameId: string, token: string): Promise<{ ok: boolean }>
 export function createSSE(gameId: string, token: string): EventSource {
   return new EventSource(`${BASE}/games/${gameId}/stream?token=${token}`)
 }
+
+// ── Admin ──────────────────────────────────────────────────
+
+export function adminLogin(password: string): Promise<{ token: string }> {
+  return request('/admin/login', {
+    method: 'POST',
+    body: JSON.stringify({ password }),
+  })
+}
+
+export interface GameHistoryRecord {
+  game_id: string
+  code: string
+  mode: string
+  player1_name: string
+  player2_name: string
+  winner_key: string | null
+  winner_name: string | null
+  reason: string
+  completed_at: string
+  duration_seconds: number
+  player1_shots: { hits: number; misses: number; total: number } | null
+  player2_shots: { hits: number; misses: number; total: number } | null
+  player1_ships_sunk: number
+  player2_ships_sunk: number
+}
+
+export function adminGetHistory(token: string): Promise<{ games: GameHistoryRecord[] }> {
+  return request('/admin/history', {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
