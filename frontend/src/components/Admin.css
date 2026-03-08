@@ -3,7 +3,7 @@
    ============================================ */
 
 .admin-card {
-  max-width: 960px;
+  max-width: 1200px;
   width: 100%;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .history-table th {
-  padding: 0.6rem 0.75rem;
+  padding: 0.5rem 0.5rem;
   text-align: left;
   font-weight: 800;
   font-size: 0.55rem;
@@ -93,7 +93,7 @@
 }
 
 .history-table td {
-  padding: 0.55rem 0.75rem;
+  padding: 0.45rem 0.5rem;
   border-bottom: 1px solid var(--border);
   color: var(--text);
   white-space: nowrap;
